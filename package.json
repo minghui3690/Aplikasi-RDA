@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "npm install && npm install --prefix server && npm run build --prefix server && vite build",
+    "build": "npm install --legacy-peer-deps && npm install --prefix server && npm run build --prefix server && vite build",
     "preview": "vite preview",
     "start": "cd server && npm start"
   },
