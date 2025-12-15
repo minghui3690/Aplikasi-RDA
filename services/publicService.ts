@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Product, Voucher } from '../types';
 
-const API_URL = 'http://localhost:5001/api';
+const API_URL = '/api';
 
 export const publicApi = {
     getProducts: async (): Promise<Product[]> => {

@@ -13,7 +13,7 @@ const MemberConsultation: React.FC = () => {
         try {
             const token = localStorage.getItem('rda_token');
             // Update port to 5001 to match server/index.ts
-            const res = await fetch('http://localhost:5001/api/consultation/my-consultations', {
+            const res = await fetch('/api/consultation/my-consultations', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.ok) {

@@ -457,7 +457,7 @@ const ProductManagement: React.FC<Props> = ({ user, cart, addToCart, removeFromC
           if (url.startsWith('/')) {
               // Assume backend is on port 5001 (standard local setup)
               // In production, this should be an environment variable
-              const backendUrl = window.location.hostname === 'localhost' ? 'http://localhost:5001' : ''; 
+              const backendUrl = ''; 
               finalUrl = backendUrl + url;
           }
           window.open(finalUrl, '_blank');

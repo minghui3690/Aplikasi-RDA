@@ -6,7 +6,7 @@ const getApiUrl = () => {
        const host = window.location.hostname;
        return `http://${host}:5001/api/consultation`;
    }
-   return 'http://localhost:5001/api/consultation';
+   return '/api/consultation';
 };
 
 const API_URL = getApiUrl();
