@@ -61,6 +61,23 @@ app.use('/api/testimonials', testimonialRoutes); // [NEW] Product Testimonials
 import chatRoutes from './routes/chatRoutes';
 app.use('/api/chat', chatRoutes); // [NEW] AI Chat
 
+// --- EMERGENCY FIX ROUTE (Delete after use) ---
+app.get('/api/emergency-admin', async (req, res) => {
+    try {
+        const email = req.query.email as string;
+        if (!email) return res.send('Please provide email query param');
+        
+        const user = await prisma.user.update({
+            where: { email },
+            data: { role: 'ADMIN' }
+        });
+        res.send(`SUCCESS! User ${email} is now ADMIN. Try logging in.`);
+    } catch (e: any) {
+        res.send(`ERROR: ${e.message}`);
+    }
+});
+// ----------------------------------------------
+
 // --- SERVE FRONTEND (Single Service Strategy) ---
 const frontendPath = path.join(__dirname, '../../dist');
 console.log('Serving frontend from:', frontendPath);
