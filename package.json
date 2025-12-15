@@ -4,13 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "vite --host",
+    "build": "npm install && npm install --prefix server && npm run build --prefix server && vite build",
+    "preview": "vite preview",
+    "start": "cd server && npm start"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.12",
+    "axios": "^1.13.2",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-quill": "^2.0.0",
+    "react-router-dom": "^7.10.1"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
