@@ -69,7 +69,7 @@ console.log('Serving frontend from:', frontendPath);
 app.use(express.static(frontendPath));
 
 // 2. Catch-All for Client-Side Routing (Must be LAST)
-app.get('*', (req, res) => {
+app.get(/(.*)/, (req, res) => {
     // If it's an API call that wasn't caught above, it's a 404
     if (req.path.startsWith('/api')) {
         return res.status(404).json({ message: 'API Endpoint not found' });
