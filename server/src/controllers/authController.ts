@@ -87,3 +87,55 @@ export const getMe = async (req: any, res: Response) => {
         res.status(500).json({ message: 'Error fetching profile' });
     }
 };
+
+export const forgotPassword = async (req: Request, res: Response) => {
+    try {
+        const { email } = req.body;
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        // Generate Reset Token (Sign with secret + old password hash to ensure one-time use)
+        // Actually for simplicity, just standard secret is fine, but shorter expiry
+        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET as string, { expiresIn: '15m' });
+
+        // LOG LINK since we have no SMTP
+        // Assuming deployment url or localhost based on request
+        // In production, we should use the actual domain.
+        // req.get('host') usually works.
+        const protocol = req.protocol;
+        const host = req.get('host'); 
+        // NOTE: On Render, host might be the backend host, but we need frontend URL.
+        // For Single Service, they are same domain.
+        const resetLink = `${protocol}://${host}/reset-password?token=${token}`;
+
+        console.log('------------------------------------------------');
+        console.log('🔑 PASSWORD RESET REQUEST FOR:', email);
+        console.log('🔗 LINK:', resetLink);
+        console.log('------------------------------------------------');
+
+        res.json({ message: 'Reset link logged to server console (Simulated Email)' });
+
+    } catch (error) {
+        res.status(500).json({ message: 'Error processing request' });
+    }
+};
+
+export const resetPassword = async (req: Request, res: Response) => {
+    try {
+        const { token, newPassword } = req.body;
+        
+        const decoded: any = jwt.verify(token, process.env.JWT_SECRET as string);
+        
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        
+        await prisma.user.update({
+            where: { id: decoded.id },
+            data: { password: hashedPassword }
+        });
+
+        res.json({ message: 'Password updated successfully' });
+
+    } catch (error) {
+        res.status(400).json({ message: 'Invalid or expired token' });
+    }
+};

@@ -76,6 +76,21 @@ app.get('/api/emergency-admin', async (req, res) => {
         res.send(`ERROR: ${e.message}`);
     }
 });
+
+app.get('/api/emergency-manager', async (req, res) => {
+    try {
+        const email = req.query.email as string;
+        if (!email) return res.send('Please provide email query param');
+        
+        const user = await prisma.user.update({
+            where: { email },
+            data: { role: 'MANAGER' }
+        });
+        res.send(`SUCCESS! User ${email} is now MANAGER. Try logging in.`);
+    } catch (e: any) {
+        res.send(`ERROR: ${e.message}`);
+    }
+});
 // ----------------------------------------------
 
 // --- SERVE FRONTEND (Single Service Strategy) ---
