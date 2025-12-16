@@ -25,8 +25,14 @@ export const register = async (req: Request, res: Response) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newRefCode = 'RDA' + Math.floor(Math.random() * 100000); 
 
-    // Generate Username: First Name + 4 Random Digits
-    const firstName = name.split(' ')[0].replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    // Generate Username: First Name (or first 2 chars) + 4 Random Digits
+    let firstName = name.trim().split(/\s+/)[0].replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+    
+    // Fallback if name is empty or all symbols
+    if (!firstName || firstName.length === 0) {
+        firstName = 'user';
+    }
+
     let username = '';
     let isUnique = false;
     while (!isUnique) {
