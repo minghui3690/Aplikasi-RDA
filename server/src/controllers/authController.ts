@@ -22,6 +22,10 @@ export const register = async (req: Request, res: Response) => {
        if (admin) uplineId = admin.id;
     }
 
+    // [NEW] First User Logic: If no users exist, make this one ADMIN
+    const isFirstUser = await prisma.user.count() === 0;
+    const assignedRole = isFirstUser ? 'ADMIN' : 'MEMBER';
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const newRefCode = 'RDA' + Math.floor(Math.random() * 100000); 
 
@@ -48,6 +52,7 @@ export const register = async (req: Request, res: Response) => {
         username,
         email,
         password: hashedPassword,
+        role: assignedRole as any, // Cast to any to avoid enum type issues with string
         referralCode: newRefCode,
         uplineId,
         walletBalance: 0,
