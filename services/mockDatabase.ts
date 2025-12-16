@@ -41,8 +41,8 @@ const DEFAULT_SETTINGS: SystemSettings = {
     { id: '3', title: 'New Product Launch', date: new Date(Date.now() - 172800000).toISOString(), content: 'Check out our new Diamond Package with enhanced benefits!' }
   ],
   branding: {
-    appTitle: 'Rich Dragon Academy',
-    appSubtitle: 'Build Your Destiny',
+    appTitle: 'KamiKita',
+    appSubtitle: 'Empowering Community',
     logo: '',
     theme: {
       cardBackground: '#ffffff',
@@ -127,6 +127,16 @@ const DEFAULT_ADMIN: User = {
 export const seedData = () => {
   // ... (Seeding logic remains same)
   let currentSettings = getStorage<SystemSettings | null>(KEYS.SETTINGS, null);
+
+  // FORCE CLEANUP OLD BRANDING (Move out of if-block)
+  if (currentSettings && currentSettings.branding) {
+      if (currentSettings.branding.appTitle === 'Rich Dragon Academy') {
+          currentSettings.branding.appTitle = DEFAULT_SETTINGS.branding.appTitle;
+          currentSettings.branding.appSubtitle = DEFAULT_SETTINGS.branding.appSubtitle;
+          setStorage(KEYS.SETTINGS, currentSettings);
+      }
+  }
+
   if (!currentSettings) {
       setStorage(KEYS.SETTINGS, DEFAULT_SETTINGS);
   } else {

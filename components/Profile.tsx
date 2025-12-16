@@ -76,7 +76,7 @@ const Profile: React.FC<ProfileProps> = ({ user, onUpdate, onNavigate }) => {
             name: formData.name,
             email: formData.email,
             avatar: formData.avatar,
-            password: newPassword ? newPassword : undefined, 
+            avatar: formData.avatar, 
             kyc: { 
                 ...user.kyc, 
                 phone: formData.phone,

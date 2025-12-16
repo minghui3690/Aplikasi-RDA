@@ -1,6 +1,7 @@
 
 // @ts-nocheck
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SystemSettings, Testimonial, SocialLink } from '../types';
 import { settingsApi } from '../services/settingsService';
 import { getUsers } from '../services/userService';
@@ -11,6 +12,7 @@ interface SettingsProps {
 }
 
 const Settings: React.FC<SettingsProps> = ({ onUpdate }) => {
+  const navigate = useNavigate();
   const [settings, setSettings] = useState<SystemSettings | null>(null); // Start null to check loading
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
@@ -186,6 +188,8 @@ const Settings: React.FC<SettingsProps> = ({ onUpdate }) => {
                       <h3 className="text-xl font-bold text-gray-800">Member Config</h3>
                       <p className="text-gray-500 text-center mt-2 text-sm">Profile Visibility & Permissions</p>
                   </button>
+
+
               </div>
           </div>
       );

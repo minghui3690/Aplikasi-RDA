@@ -25,7 +25,7 @@ interface Props {
 }
 
 const ProductManagement: React.FC<Props> = ({ user, cart, addToCart, removeFromCart, updateCartQty, clearCart, onSuccess, viewMode = 'shop', currentLang = 'EN', systemSettings: settings }) => {
-  const isAdmin = user.role === UserRole.ADMIN || user.role === UserRole.MANAGER;
+  const isAdmin = user.role === UserRole.MASTER || user.role === UserRole.ADMIN || user.role === UserRole.MANAGER;
   // const settings = getSettings(); // Now using prop
   const [products, setProducts] = useState<Product[]>([]);
   const [myPurchasedProducts, setMyPurchasedProducts] = useState<Product[]>([]);

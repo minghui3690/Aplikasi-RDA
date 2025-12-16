@@ -253,7 +253,7 @@ const App: React.FC = () => {
                 <Route path="/reviews" element={isAdminOrManager ? <TestimonialManager /> : <Navigate to="/dashboard" />} />
                 <Route path="/my-consultations" element={!isAdminOrManager ? <MemberConsultation /> : <Navigate to="/dashboard" />} />
                 
-                <Route path="/profile" element={<Profile user={currentUser} onUpdate={(u) => setCurrentUser(u)} />} />
+                <Route path="/profile" element={<Profile user={currentUser} onUpdate={() => initAuth()} onNavigate={onNavigate} />} />
                 <Route path="/admin/knowledge" element={isSuperAdmin ? <HDKnowledgeManager /> : <Navigate to="/dashboard" />} />
                 <Route path="/ai-consultant" element={isAdminOrManager || (currentUser?.isAiAssistantUnlocked) ? <HDChatAssistant currentUser={currentUser || undefined} /> : <Navigate to="/dashboard" />} />
                 <Route path="/human-design" element={<MemberHumanDesignView currentUser={currentUser} />} />

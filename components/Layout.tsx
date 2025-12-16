@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { Icons, TRANSLATIONS } from '../constants';
 import { User, UserRole } from '../types';
 import { getNetworkStats, getSettings } from '../services/mockDatabase';
+import kamikitaLogo from '../assets/kamikita_logo.jpg';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -74,15 +75,9 @@ const Layout: React.FC<LayoutProps> = ({ children, user, onLogout, currentPage, 
 
   return (
     <div className="flex h-screen bg-gray-50 font-sans">
-      <aside className="w-64 bg-slate-900 text-white flex flex-col shadow-xl z-10 hidden md:flex">
-        <div className="p-6 border-b border-slate-800 flex flex-col items-center text-center">
-          {settings?.branding?.logo && (
-             <img src={settings.branding.logo} className="h-12 w-auto mb-3 object-contain" alt="Logo" />
-          )}
-          <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-            {settings.branding.appTitle}
-          </h1>
-          <p className="text-xs text-slate-400 mt-1">{settings.branding.appSubtitle}</p>
+      <aside className="w-64 bg-black text-white flex flex-col shadow-xl z-10 hidden md:flex">
+        <div className="bg-black p-4 border-b border-white flex flex-col items-center text-center justify-center min-h-[140px]">
+           <img src={kamikitaLogo} className="w-full px-2 h-auto object-contain" alt="KamiKita Logo" />
         </div>
 
         <nav className="flex-1 py-6 px-3 space-y-1 overflow-y-auto">
@@ -93,7 +88,7 @@ const Layout: React.FC<LayoutProps> = ({ children, user, onLogout, currentPage, 
               className={`w-full flex items-center text-left px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 ${
                 currentPage === item.id
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
-                  : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                  : 'text-slate-300 hover:bg-gray-900 hover:text-white'
               }`}
             >
               <span className="mr-3">{item.icon()}</span>
@@ -102,7 +97,7 @@ const Layout: React.FC<LayoutProps> = ({ children, user, onLogout, currentPage, 
           ))}
         </nav>
 
-        <div className="p-4 border-t border-slate-800">
+        <div className="p-4 border-t border-white">
           <div className="flex items-center gap-3 mb-4">
             {user.avatar ? (
                 <img src={user.avatar} className="w-10 h-10 rounded-full object-cover border-2 border-slate-700" alt="Avatar" />

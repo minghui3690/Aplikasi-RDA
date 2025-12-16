@@ -237,7 +237,9 @@ const MemberManagement: React.FC<Props> = ({ currentLang = 'EN', currentUser }) 
             birthCity: user.kyc.birthCity,
             birthTime: user.kyc.birthTime,
             address: user.kyc.address,
-            withdrawalMethods: user.kyc.withdrawalMethods || []
+            address: user.kyc.address,
+            withdrawalMethods: user.kyc.withdrawalMethods || [],
+            role: user.role
         });
         // Check for Human Design
         try {
@@ -285,6 +287,7 @@ const MemberManagement: React.FC<Props> = ({ currentLang = 'EN', currentUser }) 
         if (!selectedUser) return;
         try {
             await userService.updateUserAdmin(selectedUser.id, {
+                role: editUserData.role,
                 name: editUserData.name,
                 email: editUserData.email,
                 kyc: {
@@ -294,8 +297,6 @@ const MemberManagement: React.FC<Props> = ({ currentLang = 'EN', currentUser }) 
                     accountNumber: editUserData.accountNumber,
                     accountHolder: editUserData.accountHolder,
                     gender: editUserData.gender,
-                    birthDate: editUserData.birthDate,
-                    birthCity: editUserData.birthCity,
                     birthDate: editUserData.birthDate,
                     birthCity: editUserData.birthCity,
                     birthTime: editUserData.birthTime,
@@ -621,7 +622,12 @@ const MemberManagement: React.FC<Props> = ({ currentLang = 'EN', currentUser }) 
                     <div className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden max-h-[95vh] flex flex-col" onClick={e => e.stopPropagation()}>
                         <div className="bg-slate-900 px-6 py-4 flex justify-between items-center text-white shrink-0">
                             <h3 className="font-bold text-lg">{isEditingUser ? 'Edit Member' : 'Member Details'}</h3>
-                            <button onClick={() => setSelectedUser(null)}><Icons.X /></button>
+                            <div className="flex items-center gap-2">
+                                {!isEditingUser && (
+                                    <button onClick={() => setIsEditingUser(true)} className="bg-blue-600 hover:bg-blue-700 text-xs px-3 py-1 rounded font-bold">Edit</button>
+                                )}
+                                <button onClick={() => setSelectedUser(null)}><Icons.X /></button>
+                            </div>
                         </div>
 
                         <div className="p-6 space-y-4 overflow-y-auto">
@@ -640,6 +646,16 @@ const MemberManagement: React.FC<Props> = ({ currentLang = 'EN', currentUser }) 
                                     </>
                                 )}
                                 <span className={`inline-block mt-2 px-2 py-0.5 text-xs rounded-full ${selectedUser.kyc.isVerified ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'}`}>{selectedUser.kyc.isVerified ? 'KYC Verified' : 'Unverified'}</span>
+                                {isEditingUser && (
+                                    <div className="mt-2 text-left bg-blue-50 p-2 rounded">
+                                        <label className="text-xs font-bold text-gray-700">Role Authority</label>
+                                        <select value={editUserData.role} onChange={e => setEditUserData({ ...editUserData, role: e.target.value })} className="w-full text-sm border rounded p-1">
+                                            <option value="MEMBER">MEMBER</option>
+                                            <option value="ADMIN">ADMIN</option>
+                                            <option value="MASTER">MASTER</option>
+                                        </select>
+                                    </div>
+                                )}
                             </div>
 
                             <div className="grid grid-cols-2 gap-4 text-sm">

@@ -26,16 +26,33 @@ const DashboardView: React.FC<DashboardViewProps> = ({
 
     React.useEffect(() => {
         const loadStats = async () => {
-            try {
+             // ... existing loadStats code ...
+             try {
                 // Determine if we need admin stats or user stats
                 // Our API /users/stats handles both based on token role
                 const data = await import('../services/transactionService').then(m => m.transactionApi.getStats());
                 setStats(data);
-            } catch (e) {
-                console.error("Failed to load dashboard stats", e);
-            }
-        };
-        loadStats();
+             } catch (e) {
+                 console.error("Failed to load dashboard stats", e);
+             }
+         };
+         loadStats();
+
+         // [DEFENSIVE] Force cleanup of potential stuck overlays (e.g. from modals)
+         const cleanupOverlays = () => {
+             document.body.style.overflow = 'auto';
+             document.body.classList.remove('modal-open');
+             const stuck = document.querySelectorAll('.fixed.inset-0.z-50.bg-black'); // Target backdrops
+             stuck.forEach(el => {
+                 console.warn('Dashboard: Removing stuck overlay', el);
+                 el.remove();
+             });
+         };
+         // Run immediately and after a short delay to catch transitions
+         cleanupOverlays();
+         setTimeout(cleanupOverlays, 100);
+         setTimeout(cleanupOverlays, 500);
+
     }, [currentUser.id]);
 
     const theme = systemSettings.branding?.theme || { cardBackground: '#ffffff', cardText: '#1f2937' };

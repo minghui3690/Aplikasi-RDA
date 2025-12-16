@@ -4,6 +4,7 @@ import * as authService from '../services/auth';
 import * as db from '../services/mockDatabase';
 import { SystemSettings, User } from '../types';
 import { Icons } from '../constants';
+import kamikitaLogo from '../assets/kamikita_logo.jpg';
 
 interface AuthPageProps {
   mode: 'login' | 'register';
@@ -70,11 +71,8 @@ const AuthPage: React.FC<AuthPageProps> = ({
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 font-sans relative">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden mb-12">
-        <div className="bg-slate-900 p-8 text-center relative">
-          {systemSettings?.branding?.logo && <img src={systemSettings?.branding?.logo} className="h-12 w-auto mx-auto mb-2" />}
-          <h2 className="mt-4 text-2xl font-bold text-gray-900">{systemSettings?.branding?.appTitle || 'KamiKita'}</h2>
-          <p className="mt-1 text-sm text-gray-600">
-            {mode === 'register' ? 'Join our community' : (systemSettings?.branding?.appSubtitle || 'Welcome back')}</p>
+        <div className="bg-black p-6 text-center relative flex items-center justify-center min-h-[160px]">
+          <img src={kamikitaLogo} className="w-full max-w-[320px] h-auto object-contain mx-auto" alt="KamiKita Logo" />
         </div>
         <div className="p-8">
           <div className="flex mb-6 border-b border-gray-100">

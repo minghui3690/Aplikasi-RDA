@@ -17,6 +17,6 @@ const router = Router();
 // Given strict requirements, let's keep GET public (so frontend can load logo etc on login screen).
 
 router.get('/', getSettings); 
-router.put('/', authenticateToken, isSuperAdmin, updateSettings);
+router.put('/', authenticateToken, isAdmin, updateSettings);
 
 export default router;
