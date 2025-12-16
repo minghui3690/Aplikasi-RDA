@@ -76,7 +76,7 @@ const Layout: React.FC<LayoutProps> = ({ children, user, onLogout, currentPage, 
     <div className="flex h-screen bg-gray-50 font-sans">
       <aside className="w-64 bg-slate-900 text-white flex flex-col shadow-xl z-10 hidden md:flex">
         <div className="p-6 border-b border-slate-800 flex flex-col items-center text-center">
-          {settings.branding.logo && (
+          {settings?.branding?.logo && (
              <img src={settings.branding.logo} className="h-12 w-auto mb-3 object-contain" alt="Logo" />
           )}
           <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">

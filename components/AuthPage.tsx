@@ -71,11 +71,10 @@ const AuthPage: React.FC<AuthPageProps> = ({
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 font-sans relative">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden mb-12">
         <div className="bg-slate-900 p-8 text-center relative">
-          {systemSettings.branding.logo && <img src={systemSettings.branding.logo} className="h-12 w-auto mx-auto mb-2" />}
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent mb-2">
-            {systemSettings.branding.appTitle}
-          </h1>
-          <p className="text-slate-400">{systemSettings.branding.appSubtitle}</p>
+          {systemSettings?.branding?.logo && <img src={systemSettings?.branding?.logo} className="h-12 w-auto mx-auto mb-2" />}
+          <h2 className="mt-4 text-2xl font-bold text-gray-900">{systemSettings?.branding?.appTitle || 'KamiKita'}</h2>
+          <p className="mt-1 text-sm text-gray-600">
+            {mode === 'register' ? 'Join our community' : (systemSettings?.branding?.appSubtitle || 'Welcome back')}</p>
         </div>
         <div className="p-8">
           <div className="flex mb-6 border-b border-gray-100">
