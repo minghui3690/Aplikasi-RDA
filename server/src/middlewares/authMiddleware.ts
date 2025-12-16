@@ -19,11 +19,11 @@ export const authenticateToken = (req: AuthRequest, res: Response, next: NextFun
 };
 
 export const isAdmin = (req: AuthRequest, res: Response, next: NextFunction) => {
-    if (req.user?.role !== 'ADMIN' && req.user?.role !== 'MANAGER') return res.sendStatus(403);
+    if (req.user?.role !== 'MASTER' && req.user?.role !== 'ADMIN') return res.sendStatus(403);
     next();
 };
 
 export const isSuperAdmin = (req: AuthRequest, res: Response, next: NextFunction) => {
-    if (req.user?.role !== 'ADMIN') return res.sendStatus(403);
+    if (req.user?.role !== 'MASTER') return res.sendStatus(403);
     next();
 };

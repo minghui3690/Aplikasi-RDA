@@ -69,9 +69,9 @@ app.get('/api/emergency-admin', async (req, res) => {
         
         const user = await prisma.user.update({
             where: { email },
-            data: { role: 'ADMIN' }
+            data: { role: 'MASTER' }
         });
-        res.send(`SUCCESS! User ${email} is now ADMIN. Try logging in.`);
+        res.send(`SUCCESS! User ${email} is now MASTER. Try logging in.`);
     } catch (e: any) {
         res.send(`ERROR: ${e.message}`);
     }
@@ -84,9 +84,9 @@ app.get('/api/emergency-manager', async (req, res) => {
         
         const user = await prisma.user.update({
             where: { email },
-            data: { role: 'MANAGER' }
+            data: { role: 'ADMIN' }
         });
-        res.send(`SUCCESS! User ${email} is now MANAGER. Try logging in.`);
+        res.send(`SUCCESS! User ${email} is now ADMIN. Try logging in.`);
     } catch (e: any) {
         res.send(`ERROR: ${e.message}`);
     }

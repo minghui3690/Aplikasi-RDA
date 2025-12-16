@@ -178,7 +178,7 @@ export const getTransactions = async (req: any, res: Response) => {
         const { userId, scope } = req.query;
         let where: any = {};
         const currentUser = req.user;
-        const isAdmin = currentUser.role === 'ADMIN' || currentUser.role === 'MANAGER';
+        const isAdmin = currentUser.role === 'MASTER' || currentUser.role === 'ADMIN';
 
         // MEMBER: GROUP HISTORY (Commissions Received)
         if (!isAdmin && scope === 'group') {
@@ -239,7 +239,7 @@ export const toggleArchive = async (req: any, res: Response) => {
     try {
         const { ids, target, archive } = req.body; // target: 'TRANSACTION' | 'COMMISSION'
         const currentUser = req.user;
-        const isAdmin = currentUser.role === 'ADMIN' || currentUser.role === 'MANAGER';
+        const isAdmin = currentUser.role === 'MASTER' || currentUser.role === 'ADMIN';
         const isArchive = archive === true;
 
         if (!ids || !Array.isArray(ids)) return res.status(400).json({ message: 'Invalid IDs' });

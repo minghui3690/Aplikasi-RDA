@@ -24,7 +24,7 @@ export const getCustomers = async (req: AuthenticatedRequest, res: Response) => 
     // Base where clause
     let whereClause: any = { isArchived: showHidden };
 
-    if (userRole === 'ADMIN' || userRole === 'MANAGER') {
+    if (userRole === 'MASTER' || userRole === 'ADMIN') {
       // Admin/Manager sees ALL (or subset if they wanted, but here ALL)
       // Logic from before: just keep whereClause as is (archived filter)
     } else {
@@ -200,7 +200,7 @@ export const upgradeToMember = async (req: Request, res: Response) => {
              if (check) return res.status(400).json({ message: 'Username already taken' });
         }
 
-        const newRefCode = 'RDA' + Math.floor(Math.random() * 100000); // Simple random for now
+        const newRefCode = 'KK' + Math.floor(Math.random() * 100000); // Simple random for now
 
         // Transaction: Create User -> Move Data -> Archive Customer
         const result = await prisma.$transaction(async (tx) => {

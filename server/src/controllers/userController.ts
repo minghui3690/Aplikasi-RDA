@@ -189,7 +189,7 @@ export const getDashboardStats = async (req: any, res: Response) => {
         
         if (!user) return res.status(404).json({ message: 'User not found' });
 
-        if (user.role === 'ADMIN' || user.role === 'MANAGER') {
+        if (user.role === 'MASTER' || user.role === 'ADMIN') {
              const [totalMembers, transactions, withdrawals] = await Promise.all([
                  prisma.user.count({ where: { role: 'MEMBER' } }),
                  prisma.transaction.findMany({ where: { status: 'PAID' } }),
@@ -496,7 +496,7 @@ export const getWithdrawals = async (req: any, res: Response) => {
         const user = await prisma.user.findUnique({where:{id:userId}});
         
         let where = {};
-        if (user?.role !== 'ADMIN' && user?.role !== 'MANAGER') {
+        if (user?.role !== 'MASTER' && user?.role !== 'ADMIN') {
             where = { userId };
         }
         
@@ -684,7 +684,7 @@ export const getRecentActions = async (req: any, res: Response) => {
         let whereTx: any = { isArchived: showHidden };
         let whereWd: any = { isArchived: showHidden };
 
-        if (user?.role !== 'ADMIN' && user?.role !== 'MANAGER') {
+        if (user?.role !== 'MASTER' && user?.role !== 'ADMIN') {
              // Fetch all downline IDs first? This is heavy.
              // Let's stick to OWN actions for now unless explicitly "Network Activity Feed" is needed.
              // Re-reading user request: "recent transaction dari jaringan member dibawahnya".
@@ -912,7 +912,7 @@ export const getKakaItems = async (req: any, res: Response) => {
         if (!user) return res.status(404).json({ message: 'User not found' });
 
         // Access Control
-        if (user.role !== 'ADMIN' && user.role !== 'MANAGER' && !user.isKakaUnlocked) {
+        if (user.role !== 'MASTER' && user.role !== 'ADMIN' && !user.isKakaUnlocked) {
             return res.status(403).json({ message: 'Access Denied: KAKA Content is locked.' });
         }
 
