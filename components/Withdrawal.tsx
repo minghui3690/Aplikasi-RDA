@@ -14,6 +14,7 @@ interface WithdrawalProps {
 
 const Withdrawal: React.FC<WithdrawalProps> = ({ user, onRefresh, systemSettings }) => {
   const isAdmin = user.role === UserRole.ADMIN || user.role === UserRole.MANAGER;
+  const IS_WITHDRAWAL_ENABLED = false; // [Config] Set to true to re-enable withdrawals
   const [withdrawals, setWithdrawals] = useState<WithdrawalRequest[]>([]);
 
   // Admin Processing State
@@ -359,7 +360,36 @@ const Withdrawal: React.FC<WithdrawalProps> = ({ user, onRefresh, systemSettings
             </div>
         </div>
 
-        {/* Request Form */}
+        {/* Request Form (CONDITIONAL) */}
+        {!IS_WITHDRAWAL_ENABLED ? (
+             <div className="bg-blue-50 p-8 rounded-xl border border-blue-100 text-center shadow-sm">
+                <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icons.Info size={32} />
+                </div>
+                <h3 className="font-bold text-gray-800 text-xl mb-2">Penarikan Dana Belum Tersedia</h3>
+                <p className="text-gray-600 max-w-lg mx-auto mb-6">
+                    Saat ini <b>Poin Reward</b> difokuskan untuk digunakan berbelanja 
+                    <b> Produk Digital & Fisik</b> di platform kami. Fitur penarikan tunai akan hadir di update mendatang.
+                </p>
+                <div className="flex justify-center gap-4">
+                     <button 
+                        onClick={() => window.location.href='/products'} 
+                        className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30 flex items-center gap-2"
+                    >
+                        <Icons.Cart size={20}/> Belanja Sekarang
+                    </button>
+                    {/* Admin Override Button (Hidden for members) */}
+                    {isAdmin && (
+                        <button 
+                             onClick={() => alert('Fitur ini dinonaktifkan di kode (IS_WITHDRAWAL_ENABLED = false)')}
+                             className="text-gray-400 text-xs hover:text-gray-600 font-mono"
+                        >
+                            [Admin: Force View?]
+                        </button>
+                    )}
+                </div>
+            </div>
+        ) : (
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <div className="flex items-center justify-between mb-6">
                  <h3 className="font-bold text-gray-800 text-lg">Request Withdrawal</h3>
@@ -423,6 +453,7 @@ const Withdrawal: React.FC<WithdrawalProps> = ({ user, onRefresh, systemSettings
                 </div>
             </div>
         </div>
+        )}
 
         {/* History */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
