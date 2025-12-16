@@ -174,7 +174,7 @@ const CustomerList: React.FC<Props> = ({ currentLang, currentUser }) => {
     const handleOpenEmailModal = (customer: Customer) => {
         setSelectedCustomer(customer);
         setEmailSubject('Start working on your Human Design now!');
-        setEmailMessage(`Hi ${customer.name},\n\nThank you for your order. Please find attached the Human Design file you purchased.\n\nBest regards,\nRich Dragon Admin`);
+        setEmailMessage(`Hi ${customer.name},\n\nThank you for your order. Please find attached the Human Design file you purchased.\n\nBest regards,\nKamiKita Admin`);
         setSelectedFile(null);
     };
 

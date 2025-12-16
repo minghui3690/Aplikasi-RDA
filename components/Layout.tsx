@@ -15,8 +15,8 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children, user, onLogout, currentPage, onNavigate, currentLang, onLangChange }) => {
-  const isSuperAdmin = user.role === UserRole.ADMIN;
-  const isManager = user.role === UserRole.MANAGER; // Assuming UserRole.MANAGER exists now
+  const isSuperAdmin = user.role === UserRole.MASTER;
+  const isManager = user.role === UserRole.ADMIN;
   const isAdminOrManager = isSuperAdmin || isManager;
 
   const networkStats = useMemo(() => getNetworkStats(user.id), [user]);

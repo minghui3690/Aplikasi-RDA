@@ -15,13 +15,13 @@ export const getSettings = async (req: Request, res: Response) => {
                     taxPercentage: 11,
                     branding: {
                         logo: '',
-                        appTitle: 'Rich Dragon',
-                        appSubtitle: 'Empowering Network Marketing',
+                        appTitle: 'KamiKita',
+                        appSubtitle: 'Empowering Community',
                         theme: { cardBackground: '#ffffff', cardText: '#000000' }
                     },
                     landingPage: {
-                        title: 'Welcome to Rich Dragon',
-                        description: 'The best platform for your business.',
+                        title: 'Welcome to KamiKita',
+                        description: 'Join our growing community.',
                         backgroundImage: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80',
                         heroAlignment: 'left',
                         features: { title: 'Why Choose Us', description: 'We offer the best features.' },

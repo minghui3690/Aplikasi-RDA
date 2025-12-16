@@ -18,16 +18,16 @@ export const register = async (req: Request, res: Response) => {
     } else {
        // Default to admin if no ref code, or handle logic
        // For now, let's look for an admin
-       const admin = await prisma.user.findFirst({ where: { role: 'ADMIN' } });
+       const admin = await prisma.user.findFirst({ where: { role: 'MASTER' } });
        if (admin) uplineId = admin.id;
     }
 
-    // [NEW] First User Logic: If no users exist, make this one ADMIN
+    // [NEW] First User Logic: If no users exist, make this one MASTER
     const isFirstUser = await prisma.user.count() === 0;
-    const assignedRole = isFirstUser ? 'ADMIN' : 'MEMBER';
+    const assignedRole = isFirstUser ? 'MASTER' : 'MEMBER';
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newRefCode = 'RDA' + Math.floor(Math.random() * 100000); 
+    const newRefCode = 'KK' + Math.floor(Math.random() * 100000); 
 
     // Generate Username: First Name (or first 2 chars) + 4 Random Digits
     let firstName = name.trim().split(/\s+/)[0].replace(/[^a-zA-Z0-9]/g, '').toLowerCase();

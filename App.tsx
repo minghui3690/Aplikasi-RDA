@@ -67,8 +67,8 @@ const App: React.FC = () => {
   const [networkDetails, setNetworkDetails] = useState<any[]>([]);
   const [networkSearch, setNetworkSearch] = useState('');
 
-  const isSuperAdmin = currentUser?.role === UserRole.ADMIN;
-  const isManager = currentUser?.role === UserRole.MANAGER;
+  const isSuperAdmin = currentUser?.role === UserRole.MASTER;
+  const isManager = currentUser?.role === UserRole.ADMIN;
   const isAdminOrManager = isSuperAdmin || isManager;
   const t = TRANSLATIONS[currentLang] || TRANSLATIONS['EN'];
 
