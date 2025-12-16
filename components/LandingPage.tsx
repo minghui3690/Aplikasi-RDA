@@ -228,16 +228,16 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, referralCode }) =
           <>
             <div className="relative bg-slate-900 text-white overflow-hidden flex-1 flex items-center min-h-[600px]">
                 <div className="absolute inset-0 z-0">
-                  <img src={settings.landingPage.backgroundImage} className="w-full h-full object-cover opacity-50 scale-105" alt="Background" />
+                  <img src={settings.landingPage?.backgroundImage || ''} className="w-full h-full object-cover opacity-50 scale-105" alt="Background" />
                   <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
                 </div>
                 <div className="relative z-10 max-w-7xl mx-auto px-4 py-24 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row">
                    <div className={`w-full max-w-3xl flex flex-col ${textAlignClass} ${heroAlign === 'center' ? 'mx-auto' : heroAlign === 'right' ? 'ml-auto' : ''}`}>
-                       <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-tight" style={{ color: settings.landingPage.textColor }}>
-                         {settings.landingPage.title}
+                       <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-tight" style={{ color: settings.landingPage?.textColor }}>
+                         {settings.landingPage?.title || 'Welcome'}
                        </h1>
-                       <p className="text-xl md:text-2xl text-slate-300 mb-10 leading-relaxed max-w-2xl" style={{ color: settings.landingPage.textColor, opacity: 0.9 }}>
-                         {settings.landingPage.description}
+                       <p className="text-xl md:text-2xl text-slate-300 mb-10 leading-relaxed max-w-2xl" style={{ color: settings.landingPage?.textColor, opacity: 0.9 }}>
+                         {settings.landingPage?.description}
                        </p>
                        <div className={`flex gap-4 ${flexAlignClass}`}>
                            <button onClick={() => setView('CATALOG')} className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:scale-105 shadow-xl shadow-emerald-500/20">Shop Products</button>
@@ -249,11 +249,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, referralCode }) =
             
             <div className="bg-white py-24">
                 <div className="max-w-7xl mx-auto px-6 text-center">
-                    <h2 className="text-3xl font-bold text-gray-900 mb-6">{settings.landingPage.features.title}</h2>
-                    <p className="text-gray-500 text-lg max-w-3xl mx-auto leading-relaxed">{settings.landingPage.features.description}</p>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-6">{settings.landingPage?.features?.title || 'Features'}</h2>
+                    <p className="text-gray-500 text-lg max-w-3xl mx-auto leading-relaxed">{settings.landingPage?.features?.description || ''}</p>
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-                        {settings.landingPage.featureBoxes.map((box, idx) => {
+                        {(settings.landingPage?.featureBoxes || []).map((box, idx) => {
                             const colors = [
                                 { bg: 'bg-blue-50', icon: 'bg-blue-100 text-blue-600' },
                                 { bg: 'bg-emerald-50', icon: 'bg-emerald-100 text-emerald-600' },
@@ -272,7 +272,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, referralCode }) =
                 </div>
             </div>
 
-            {settings.landingPage.testimonials && settings.landingPage.testimonials.length > 0 && (
+            {settings.landingPage?.testimonials && settings.landingPage.testimonials.length > 0 && (
                 <div className="bg-slate-50 py-24">
                     <div className="max-w-7xl mx-auto px-6 text-center">
                         <h2 className="text-3xl font-bold text-gray-900 mb-12">Success Stories</h2>
@@ -298,8 +298,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, referralCode }) =
           <div className="flex-1 bg-gray-50">
              <div className="bg-white border-b py-12">
                  <div className="max-w-7xl mx-auto px-4 text-center">
-                     <h1 className="text-3xl font-bold text-gray-900 mb-2">{settings.productPage.title}</h1>
-                     <p className="text-gray-500">{settings.productPage.subtitle}</p>
+                     <h1 className="text-3xl font-bold text-gray-900 mb-2">{settings.productPage?.title || 'Our Products'}</h1>
+                     <p className="text-gray-500">{settings.productPage?.subtitle || 'Browse our catalog'}</p>
                  </div>
              </div>
              
@@ -339,7 +339,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, referralCode }) =
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
            <div className="md:col-span-2">
                <h4 className="text-xl font-bold mb-4">{settings.branding.appTitle}</h4>
-               <p className="text-slate-400 text-sm max-w-sm">{settings.landingPage.footer?.aboutText}</p>
+               <p className="text-slate-400 text-sm max-w-sm">{settings.landingPage?.footer?.aboutText}</p>
            </div>
            <div>
                <h4 className="text-lg font-bold mb-4">Quick Links</h4>
@@ -351,29 +351,29 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, referralCode }) =
            </div>
            <div>
                <h4 className="text-lg font-bold mb-4">Contact</h4>
-               <p className="text-slate-400 text-sm mb-1">{settings.landingPage.footer?.contactEmail}</p>
-               <p className="text-slate-400 text-sm mb-4">{settings.landingPage.footer?.contactPhone}</p>
+               <p className="text-slate-400 text-sm mb-1">{settings.landingPage?.footer?.contactEmail}</p>
+               <p className="text-slate-400 text-sm mb-4">{settings.landingPage?.footer?.contactPhone}</p>
                
                <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                   {settings.landingPage.footer.socialMedia?.facebook && (
+                   {settings.landingPage?.footer?.socialMedia?.facebook && (
                        <a href={settings.landingPage.footer.socialMedia.facebook} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors"><Icons.Facebook /></a>
                    )}
-                   {settings.landingPage.footer.socialMedia?.instagram && (
+                   {settings.landingPage?.footer?.socialMedia?.instagram && (
                        <a href={settings.landingPage.footer.socialMedia.instagram} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors"><Icons.Instagram /></a>
                    )}
-                   {settings.landingPage.footer.socialMedia?.whatsapp && (
+                   {settings.landingPage?.footer?.socialMedia?.whatsapp && (
                        <a href={settings.landingPage.footer.socialMedia.whatsapp} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors"><Icons.WhatsApp /></a>
                    )}
-                    {settings.landingPage.footer.socialMedia?.tiktok && (
+                    {settings.landingPage?.footer?.socialMedia?.tiktok && (
                         <a href={settings.landingPage.footer.socialMedia.tiktok} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors"><Icons.TikTok /></a>
                     )}
-                    {settings.landingPage.footer.socialMedia?.youtube && (
+                    {settings.landingPage?.footer?.socialMedia?.youtube && (
                         <a href={settings.landingPage.footer.socialMedia.youtube} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors"><Icons.Youtube /></a>
                     )}
-                   {settings.landingPage.footer.socialMedia?.telegram && (
+                   {settings.landingPage?.footer?.socialMedia?.telegram && (
                        <a href={settings.landingPage.footer.socialMedia.telegram} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors"><Icons.Telegram /></a>
                    )}
-                   {settings.landingPage.footer.socialMedia?.others?.map((link, idx) => (
+                   {settings.landingPage?.footer?.socialMedia?.others?.map((link, idx) => (
                        <a key={idx} href={link.url} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-white transition-colors flex items-center gap-1 text-xs font-bold border px-2 rounded-full border-slate-600 hover:border-white">
                            {link.name}
                        </a>
@@ -382,7 +382,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, referralCode }) =
            </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-600 text-sm mt-12 pt-8 border-t border-slate-800">
-          &copy; {new Date().getFullYear()} {settings.branding.appTitle}. {settings.landingPage.footer?.copyrightText}
+          &copy; {new Date().getFullYear()} {settings.branding.appTitle}. {settings.landingPage?.footer?.copyrightText}
         </div>
       </footer>
 

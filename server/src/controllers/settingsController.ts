@@ -22,6 +22,7 @@ export const getSettings = async (req: Request, res: Response) => {
                     landingPage: {
                         title: 'Welcome to Rich Dragon',
                         description: 'The best platform for your business.',
+                        backgroundImage: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80',
                         heroAlignment: 'left',
                         features: { title: 'Why Choose Us', description: 'We offer the best features.' },
                         featureBoxes: [
