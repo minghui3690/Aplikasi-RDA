@@ -189,13 +189,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, referralCode }) =
                 <img src={appLogo} alt="Logo" className="h-12 w-auto object-contain" />
              ) : (
                 <div className="h-10 w-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
-                    {settings.branding.appTitle.charAt(0)}
+                    {(settings.branding?.appTitle || 'R').charAt(0)}
                 </div>
              )}
              <div className="flex flex-col">
-                <span className="font-bold text-xl text-gray-900 tracking-tight leading-none">{settings.branding.appTitle}</span>
-                {settings.branding.appSubtitle && (
-                    <span className="text-[11px] text-gray-500 font-medium tracking-wide uppercase mt-0.5">{settings.branding.appSubtitle}</span>
+                <span className="font-bold text-xl text-gray-900 tracking-tight leading-none">{settings.branding?.appTitle || 'Rich Dragon'}</span>
+                {settings.branding?.appSubtitle && (
+                    <span className="text-[11px] text-gray-500 font-medium tracking-wide uppercase mt-0.5">{settings.branding?.appSubtitle}</span>
                 )}
              </div>
           </div>
@@ -338,7 +338,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, referralCode }) =
       <footer className="bg-slate-900 text-white py-12 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
            <div className="md:col-span-2">
-               <h4 className="text-xl font-bold mb-4">{settings.branding.appTitle}</h4>
+               <h4 className="text-xl font-bold mb-4">{settings.branding?.appTitle || 'Rich Dragon'}</h4>
                <p className="text-slate-400 text-sm max-w-sm">{settings.landingPage?.footer?.aboutText}</p>
            </div>
            <div>
@@ -382,7 +382,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, referralCode }) =
            </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-600 text-sm mt-12 pt-8 border-t border-slate-800">
-          &copy; {new Date().getFullYear()} {settings.branding.appTitle}. {settings.landingPage?.footer?.copyrightText}
+          &copy; {new Date().getFullYear()} {settings.branding?.appTitle || 'Rich Dragon'}. {settings.landingPage?.footer?.copyrightText}
         </div>
       </footer>
 
